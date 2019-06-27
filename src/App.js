@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 import './App.css';
 
@@ -80,7 +81,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -100,6 +105,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[":hover"] = {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     const classes = [];
@@ -112,17 +121,19 @@ class App extends Component {
     }
 
     return (
-      <div className='App'>
-        <h1>Hello, I'm a React App</h1>
-        <p className={classes.join(' ')}>Here are my Korean friends!</p>
-        <button onClick={this.switchNamehandlerE}>Switch English Names!</button>
-        <button onClick={this.switchNamehandlerK}>Switch Korean Names!</button>
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className='App'>
+          <h1>Hello, I'm a React App</h1>
+          <p className={classes.join(' ')}>Here are my Korean friends!</p>
+          <button onClick={this.switchNamehandlerE}>Switch English Names!</button>
+          <button onClick={this.switchNamehandlerK}>Switch Korean Names!</button>
+          <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
+        </div>
+      </StyleRoot>
     )
   };
 }
 
 
-export default App;
+export default Radium(App);
